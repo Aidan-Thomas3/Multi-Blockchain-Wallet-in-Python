@@ -26,7 +26,7 @@ w3.middleware_onion.inject(geth_poa_middleware, layer=0)
  
 # Create a function called `derive_wallets`
 def derive_wallets(coin = BTC, mnemonic = mnemonic, depth = 3):
-    command = './derive -g --mnemonic="{mnemonic}" --cols=path,address,privkey,pubkey --coin=ETH --format=json'
+    command = 'php ./derive -g --mnemonic="{mnemonic}" --cols=path,address,privkey,pubkey --coin=ETH --format=json'
     p = subprocess.Popen(command, stdout = subprocess.PIPE, shell = True)
     output, err = p.communicate()
     p_status = p.wait()
@@ -35,8 +35,7 @@ def derive_wallets(coin = BTC, mnemonic = mnemonic, depth = 3):
 # Create a dictionary object called coins to store the output from `derive_wallets`.
 coins = {BTCTEST: derive_wallets(coin = BTCTEST), ETH: derive_wallets(coin = ETH)}
 
-# Create a dictionary object called coins to store the output from `derive_wallets`.
-unt` that converts privkey strings to account objects.
+# Create a function called `priv_key_to_account` that converts privkey strings to account objects.
 def priv_key_to_account(coin, priv_key):
     if coin == ETH:
         return Account.privateKeyToAccount(priv_key)
